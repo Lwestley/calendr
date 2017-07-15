@@ -1,4 +1,4 @@
-# Redux Fullstack Template
+# Calendr
 
 
 ## Installation
