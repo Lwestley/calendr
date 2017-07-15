@@ -8,6 +8,14 @@ export let createAppointment = (appointment, next) => {
     Appointment.create(appointment, next);
 };
 
+export let deleteAppointment = (appointment, next) => {
+    Appointment.create(appointment, next);
+};
+
+export let updateAppointment = (appointment, next) => {
+    Appointment.create(appointment, next);
+};
+
 export let getAllAppointments = (next) => {
     Appointment.find({}, next); // returns an array
 };

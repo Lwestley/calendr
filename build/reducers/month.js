@@ -27,6 +27,11 @@ let month = (state = {}, action) => {
         case 'DELETE_APPOINTMENT':
         console.log('Deleted an appointment', action);
         return {...state, status: action.status};
+
+        case 'UPDATE_APPOINTMENT':
+        console.log('Updated an appointment', action);
+        return {...state, status: action.status};
+        
         default:
 
         return state;

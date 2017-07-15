@@ -32,3 +32,10 @@ export let removeAppointment = (task) => {
         task
     };
 };
+
+export let updateAppointment = (task) => {
+    return {
+        type: 'REMOVE_APPOINTMENT',
+        task
+    };
+};
