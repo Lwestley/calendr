@@ -9,9 +9,9 @@ export default class Calendar extends React.Component {
     }
 
     componentWillMount() {
-        axios.get('/appointment').then(response => {
-
-        this.props.loadAppointments(response.data);
+        let month = (new Date()).getUTCMonth();
+        axios.get(`/appointments/${month}`).then(response => {
+            this.props.loadAppointments(response.data);
         });
 
     }

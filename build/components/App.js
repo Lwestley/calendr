@@ -41,7 +41,11 @@ class App extends React.Component {
             <BrowserRouter>
                 <div>
                     {/*<Link to="/">back</Link><br />*/}
-                    <Route path="/appointment/:date" render={(routeProps) => <Appointment {...this.props} {...routeProps} />}/>
+                    <Route path="/appointment/:date" render={(routeProps) => {
+                        let myDay = (new Date(routeProps.match.params.date)).getUTCDate();
+                        let myAppointment = this.props.month[myDay][0];
+                        return (<Appointment {...this.props} {...routeProps} appointment={myAppointment} date={myDay}/>);
+                    }}/>
                     <Route exact path="/" render={(routeProps) => <Calendar {...this.props} {...routeProps} />} />
                     {/*<Route exact path="/users" render={(routeProps) => <UserTodoList {...this.props} {...routeProps} />} />*/}
                     {/*<Route path="/users/:id/todo" render={this.navigateToSingleUser} />*/}

@@ -35,6 +35,17 @@ export default (app) => {
         });
     });
 
+
+    app.get('/appointments/:month', (req, res) => {
+        AppointmentService.getAllAppointmentsByMonth(req.params.month, (err, data) => {
+            if (!err) {
+                console.log(data);
+            }
+            console.log('hello');
+            res.json(data);
+        });
+    });
+
     app.get('/users', (req, res) => {
         UserService.getAllUsers((err, users) => {
             if (users) {

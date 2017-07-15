@@ -20,6 +20,19 @@ export let getAllAppointments = (next) => {
     Appointment.find({}, next); // returns an array
 };
 
+export let getAllAppointmentsByMonth = (month, next) => {
+    let year = (new Date()).getFullYear();
+    let amountOfDays = (new Date(year, month, 0)).getUTCDate();
+
+    let beginningOfTheMonthDate = new Date(year, month, 1);
+
+    let endOfTheMonthDate = new Date(year, month, amountOfDays);
+    
+    Appointment.find({
+        scheduledDate: {$gte: beginningOfTheMonthDate, $lte: endOfTheMonthDate}
+    }, next); // returns an array
+};
+
 // export let getAppointmentsByMonth = () =>{
 //     Appointment.find({}, next);
 // }

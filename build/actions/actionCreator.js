@@ -39,3 +39,12 @@ export let updateAppointment = (task) => {
         task
     };
 };
+
+export let editAppointment = (date, newText, property) => {
+    return {
+        type: 'EDIT_APPOINTMENT_TEMP',
+        date,
+        newText,
+        property
+    };
+};
