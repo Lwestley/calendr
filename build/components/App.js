@@ -5,10 +5,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../actions/actionCreator';
-// import BasicRouting from './BasicRouting';
-// import Todo from './Todo';
-// import Todo from './Todo';
-// import UserTodoList from './UserTodoList';
 import Appointment from './Appointment';
 import Calendar from './Calendar';
 

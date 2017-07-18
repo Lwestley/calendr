@@ -46,6 +46,31 @@ export default (app) => {
         });
     });
 
+    app.put('/appointment/:date', (req, res) => {
+        console.log('Appointment updated?', req.params.id);
+        console.log(req.body);
+        updateAppointment(req.params.id, req.body, (err, data) => {
+            if (!err) {
+                res.json({ appointment: data.appointment });
+            }
+            else {
+                res.json({ error: 'there was an error', err });
+            }
+        })
+    })
+
+    app.delete('/appointment/:date', (req, res) => {
+        console.log('Appointment deleted', req.params.id);
+        deleteAppointment(req.params.id, req.params.appointment, (err, data) => {
+            if (!err) {
+                res.json({ appointment: data.appointment });
+            }
+            else {
+                res.json({ error: 'error', err });
+            }
+        })
+    })
+
     app.get('/users', (req, res) => {
         UserService.getAllUsers((err, users) => {
             if (users) {

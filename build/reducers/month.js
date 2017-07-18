@@ -23,11 +23,12 @@ let month = (state = {}, action) => {
         return clonedState;
 
         case 'ADD_APPOINTMENT':
-        return {...state, status: action.status};
+        return {...state, month: action.appointment};
 
         case 'DELETE_APPOINTMENT':
         console.log('Deleted an appointment', action);
-        return {...state, status: action.status};
+        return {...state, month: action.appointment};
+
         case 'EDIT_APPOINTMENT_TEMP':
         clonedState = Object.assign({}, state);
         clonedState[action.date][0][action.property] = action.newText;
@@ -35,7 +36,7 @@ let month = (state = {}, action) => {
 
         case 'UPDATE_APPOINTMENT':
         console.log('Updated an appointment', action);
-        return {...state, status: action.status};
+        return {...state, month: action.appointment};
         
         default:
 

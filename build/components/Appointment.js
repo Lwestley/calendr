@@ -6,8 +6,11 @@ export default class Appointment extends React.Component {
         super();
 
         this.handleClick = this.handleClick.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.renderExistingAppointment = this.renderExistingAppointment.bind(this);
         this.renderNewAppointment = this.renderNewAppointment.bind(this);
+        
     }
 
     handleClick(event) {
@@ -19,7 +22,7 @@ export default class Appointment extends React.Component {
             let rxdescription = this.refs.rx.value;
             let notes = this.refs.notes.value;
             try {
-                
+
                 axios.post('/appointment', {
                     firstName: firstname,
                     lastName: lastname,
@@ -39,7 +42,19 @@ export default class Appointment extends React.Component {
         }
     }
 
-    renderExistingAppointment(){
+    handleUpdate() {
+        axios.put(`/appointment/${year}-${month + 1}-${i}`).then((res) => {
+            this.props.updateAppointment(res.data.appointment);
+        });
+    }
+
+    handleDelete(appointment) {
+        axios.delete(`/appointment/${year}-${month + 1}-${i}`).then((res) => {
+            this.props.deleteAppointment(res.data.appointment);
+        });
+    }
+
+    renderExistingAppointment() {
         return (
             <div>
                 <h1>{this.props.appointment.firstName}'s Appointment</h1>
@@ -52,14 +67,16 @@ export default class Appointment extends React.Component {
                 <button className="btn waves-effect blue waves-light" type="submit" name="action" onClick={this.handleClick}>Update
                     <i className="material-icons right">replay</i>
                 </button>
-                 <button className="btn btn-flat waves-effect waves-light" type="submit" name="action" onClick={this.handleClick}>Delete
+                <button className="btn btn-flat waves-effect waves-light" type="submit" name="action" onClick={() => {
+                    this.handleDelete(appointment)
+                }}>Delete
                     <i className="material-icons right">not_interested</i>
                 </button>
             </div>
         );
     }
 
-    renderNewAppointment(){
+    renderNewAppointment() {
         return (
             <div>
                 <h1>New Appointment</h1>
@@ -78,7 +95,7 @@ export default class Appointment extends React.Component {
 
     render() {
         let myComponent = null;
-        if(this.props.appointment && this.props.appointment._id){
+        if (this.props.appointment && this.props.appointment._id) {
             myComponent = this.renderExistingAppointment();
         }
         else {
@@ -87,7 +104,6 @@ export default class Appointment extends React.Component {
 
         return (
             <div>
-                
                 {myComponent}
             </div>
 

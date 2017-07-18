@@ -26,16 +26,16 @@ export let addAppointment = (task) => {
     };
 }
 
-export let removeAppointment = (task) => {
+export let deleteAppointment = (task) => {
     return {
-        type: 'REMOVE_APPOINTMENT',
+        type: 'DELETE_APPOINTMENT',
         task
     };
 };
 
 export let updateAppointment = (task) => {
     return {
-        type: 'REMOVE_APPOINTMENT',
+        type: 'UPDATE_APPOINTMENT',
         task
     };
 };

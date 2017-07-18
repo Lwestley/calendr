@@ -9,11 +9,11 @@ export let createAppointment = (appointment, next) => {
 };
 
 export let deleteAppointment = (appointment, next) => {
-    Appointment.create(appointment, next);
+    Appointment.findOneAndRemove(appointment, next);
 };
 
 export let updateAppointment = (appointment, next) => {
-    Appointment.create(appointment, next);
+    Appointment.update(appointment, next);
 };
 
 export let getAllAppointments = (next) => {
