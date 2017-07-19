@@ -46,24 +46,11 @@ export default (app) => {
         });
     });
 
-    app.put('/appointment/:date', (req, res) => {
-        console.log('Appointment updated?', req.params.id);
-        console.log(req.body);
-        updateAppointment(req.params.id, req.body, (err, data) => {
+    app.put('/appointment/:appointmentId', (req, res) => {
+        console.log('Appointment updated', req.params.appointmentId);
+        AppointmentService.updateAppointment(req.params.appointmentId, req.body, (err, data) => {
             if (!err) {
-                res.json({ appointment: data.appointment });
-            }
-            else {
-                res.json({ error: 'there was an error', err });
-            }
-        })
-    })
-
-    app.delete('/appointment/:date', (req, res) => {
-        console.log('Appointment deleted', req.params.id);
-        deleteAppointment(req.params.id, req.params.appointment, (err, data) => {
-            if (!err) {
-                res.json({ appointment: data.appointment });
+                res.json({ success: true });
             }
             else {
                 res.json({ error: 'error', err });
@@ -71,51 +58,63 @@ export default (app) => {
         })
     })
 
-    app.get('/users', (req, res) => {
-        UserService.getAllUsers((err, users) => {
-            if (users) {
-                // console.log('USERS! : ', users); // debugging purposes
-                res.json({ users });
-            }
-            else {
-                res.statusCode(400);
-                res.send('Error!');
-            }
-        });
-    });
-
-    app.put('/users/:id/task', (req, res) => {
-        console.log('Is our ID there?', req.params.id);
-        console.log('Is our correct task there?', req.body);
-        UserService.push(req.params.id, req.body, (err, modifiedObject) => {
+    app.delete('/appointment/:appointmentId', (req, res) => {
+        console.log('Appointment deleted', req.params.appointmentId);
+        AppointmentService.deleteAppointment(req.params.appointmentId, (err, data) => {
             if (!err) {
-                res.json(modifiedObject);
+                res.json({ success: true });
             }
             else {
-                res.json({ error: 'There was an error!', data: null });
+                res.json({ error: 'error', err });
             }
-        });
-    });
+        })
+    })
 
-    app.put('/users/:id/todoList', (req, res) => {
-        console.log('Is our ID there?', req.params.id);
-        console.log('Is our correct todoList there?', req.body);
-        UserService.updateTodoList(req.params.id, req.body, (err, modifiedObject) => {
-            if (!err) {
-                res.json(modifiedObject);
-            }
-            else {
-                res.json({ error: 'There was an error!', data: null });
-            }
-        });
-    });
+    // app.get('/users', (req, res) => {
+    //     UserService.getAllUsers((err, users) => {
+    //         if (users) {
+    //             // console.log('USERS! : ', users); // debugging purposes
+    //             res.json({ users });
+    //         }
+    //         else {
+    //             res.statusCode(400);
+    //             res.send('Error!');
+    //         }
+    //     });
+    // });
 
-    app.get('/users/:id/test', (req, res) => {
-        console.log('Is our ID there?', req.params.id);
-        UserService.getAllUserFriends(req.params.id, (err, data) => {
-            res.json({ error: err, data: data });
-        });
-    });
+    // app.put('/users/:id/task', (req, res) => {
+    //     console.log('Is our ID there?', req.params.id);
+    //     console.log('Is our correct task there?', req.body);
+    //     UserService.push(req.params.id, req.body, (err, modifiedObject) => {
+    //         if (!err) {
+    //             res.json(modifiedObject);
+    //         }
+    //         else {
+    //             res.json({ error: 'There was an error!', data: null });
+    //         }
+    //     });
+    // });
+
+    // app.put('/users/:id/todoList', (req, res) => {
+    //     console.log('Is our ID there?', req.params.id);
+    //     console.log('Is our correct todoList there?', req.body);
+    //     UserService.updateTodoList(req.params.id, req.body, (err, modifiedObject) => {
+    //         if (!err) {
+    //             res.json(modifiedObject);
+    //         }
+    //         else {
+    //             res.json({ error: 'There was an error!', data: null });
+    //         }
+    //     });
+    // });
+
+    // app.get('/users/:id/test', (req, res) => {
+    //     console.log('Is our ID there?', req.params.id);
+    //     UserService.getAllUserFriends(req.params.id, (err, data) => {
+    //         res.json({ error: err, data: data });
+    //     });
+    // });
 
 
 

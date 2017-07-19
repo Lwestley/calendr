@@ -8,12 +8,12 @@ export let createAppointment = (appointment, next) => {
     Appointment.create(appointment, next);
 };
 
-export let deleteAppointment = (appointment, next) => {
-    Appointment.findOneAndRemove(appointment, next);
+export let deleteAppointment = (appointmentId, next) => {
+    Appointment.findOneAndRemove({_id: appointmentId}, next);
 };
 
-export let updateAppointment = (appointment, next) => {
-    Appointment.update(appointment, next);
+export let updateAppointment = (appointmentId, appointment, next) => {
+    Appointment.update({_id: appointmentId}, appointment, next);
 };
 
 export let getAllAppointments = (next) => {

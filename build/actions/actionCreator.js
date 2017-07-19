@@ -26,17 +26,18 @@ export let addAppointment = (task) => {
     };
 }
 
-export let deleteAppointment = (task) => {
+export let deleteAppointment = (date) => {
     return {
         type: 'DELETE_APPOINTMENT',
-        task
+        date
     };
 };
 
-export let updateAppointment = (task) => {
+export let updateAppointment = (date, appointment) => {
     return {
         type: 'UPDATE_APPOINTMENT',
-        task
+        date,
+        appointment
     };
 };
 

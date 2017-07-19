@@ -42,33 +42,49 @@ export default class Appointment extends React.Component {
         }
     }
 
-    handleUpdate() {
-        axios.put(`/appointment/${year}-${month + 1}-${i}`).then((res) => {
-            this.props.updateAppointment(res.data.appointment);
+    handleUpdate(appointment) {
+        let myAppointment = {
+            firstName: this.refs.first_name.value,
+            lastName: this.refs.last_name.value,
+            phoneNumber: this.refs.phonenumber.value,
+            email: this.refs.email.value,
+            rxDescription: this.refs.rx.value,
+            notes: this.refs.notes.value,
+            scheduledDate: this.props.appointment.scheduledDate,
+            _id: this.props.appointment._id
+        };
+        axios.put(`/appointment/${appointment._id}`, {
+            
+        }).then((res) => {
+            this.props.updateAppointment(this.props.date);
+            this.props.history.push('/');
         });
     }
 
     handleDelete(appointment) {
-        axios.delete(`/appointment/${year}-${month + 1}-${i}`).then((res) => {
-            this.props.deleteAppointment(res.data.appointment);
+        axios.delete(`/appointment/${appointment._id}`).then((res) => {
+            this.props.deleteAppointment(this.props.date);
+            this.props.history.push('/');
         });
     }
 
     renderExistingAppointment() {
         return (
-            <div>
+            <div className = "container center">
                 <h1>{this.props.appointment.firstName}'s Appointment</h1>
-                <input type="text" placeholder="First Name" onChange={(event) => this.props.editAppointment(this.props.date, event.target.value, 'firstName')} value={this.props.appointment.firstName} required />
-                <input type="text" placeholder="Last Name" defaultValue={this.props.appointment.lastName} required />
-                <input type="tel" maxLength="10" placeholder="Phone Number" defaultValue={this.props.appointment.phoneNumber} required />
-                <input type="email" placeholder="Email" defaultValue={this.props.appointment.email} required />
-                <input type="text" placeholder="RX Description" defaultValue={this.props.appointment.rxDescription} required />
-                <input type="text" placeholder="Notes" defaultValue={this.props.appointment.notes} />
-                <button className="btn waves-effect blue waves-light" type="submit" name="action" onClick={this.handleClick}>Update
+                <input type="text" placeholder="First Name" ref="first_name" defaultValue={this.props.appointment.firstName} required />
+                <input type="text" placeholder="Last Name" ref="last_name" defaultValue={this.props.appointment.lastName} required />
+                <input type="tel" maxLength="10" placeholder="Phone Number" ref="phonenumber" defaultValue={this.props.appointment.phoneNumber} required />
+                <input type="email" placeholder="Email" ref="email" defaultValue={this.props.appointment.email} required />
+                <input type="text" placeholder="RX Description" ref="rx" defaultValue={this.props.appointment.rxDescription} required />
+                <input type="text" placeholder="Notes" ref="notes" defaultValue={this.props.appointment.notes} />
+                <button className="btn waves-effect blue waves-light" type="submit" name="action" onClick={() => {
+                    this.handleUpdate(this.props.appointment)
+                }}>Update
                     <i className="material-icons right">replay</i>
                 </button>
                 <button className="btn btn-flat waves-effect waves-light" type="submit" name="action" onClick={() => {
-                    this.handleDelete(appointment)
+                    this.handleDelete(this.props.appointment)
                 }}>Delete
                     <i className="material-icons right">not_interested</i>
                 </button>
@@ -78,7 +94,7 @@ export default class Appointment extends React.Component {
 
     renderNewAppointment() {
         return (
-            <div>
+            <div className = "container center">
                 <h1>New Appointment</h1>
                 <input type="text" placeholder="First Name" ref="first_name" required />
                 <input type="text" placeholder="Last Name" ref="last_name" required />
