@@ -1,0 +1,38 @@
+body {
+    color: #1976D2;
+    background: #fafafa;
+    font-family: 'Arvo', serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1{
+    text-align: center;
+}
+
+.box{
+    float: left;
+    height: 100px;
+    width: 100px;
+    margin: 8px;
+}
+/** Pseudo ELement **/
+.box::before {
+    content: attr(data-date);
+    color: #fafafa;
+    
+}
+
+.taken { 
+    background-color: #F75D59;
+}
+
+.available {
+    background-color: #54C571;
+}
+
+button {
+    align-content: center;
+}
+
+
+
