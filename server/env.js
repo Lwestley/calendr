@@ -8,4 +8,5 @@ if(!process.env.PORT) process.env.PORT = 3000;
 if(!process.env.DB) process.env.DB = 'mongodb://localhost:27017/calendar';
 if(!process.env.ENVIRONMENT) process.env.ENVIRONMENT = 'dev';
 
+
 // Notice we do not export these variables. `process` object is specific to Node and works out-of-the-box.
