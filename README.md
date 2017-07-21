@@ -1,5 +1,4 @@
-# Calendr
-For the Full stack online course in 2017 offered by Helio Training. 
+# Calendr 
 <br>
 I created a cool calendar appointment application.
 
