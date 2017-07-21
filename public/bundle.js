@@ -13912,8 +13912,8 @@ var Appointment = function (_React$Component) {
                 scheduledDate: this.props.appointment.scheduledDate,
                 _id: this.props.appointment._id
             };
-            _axios2.default.put('/appointment/' + appointment._id, {}).then(function (res) {
-                _this3.props.updateAppointment(_this3.props.date);
+            _axios2.default.put('/appointment/' + appointment._id, myAppointment).then(function (res) {
+                _this3.props.updateAppointment(_this3.props.date, myAppointment);
                 _this3.props.history.push('/');
             });
         }

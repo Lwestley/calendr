@@ -10,7 +10,7 @@ export default class Appointment extends React.Component {
         this.handleDelete = this.handleDelete.bind(this);
         this.renderExistingAppointment = this.renderExistingAppointment.bind(this);
         this.renderNewAppointment = this.renderNewAppointment.bind(this);
-        
+
     }
 
     handleClick(event) {
@@ -53,10 +53,8 @@ export default class Appointment extends React.Component {
             scheduledDate: this.props.appointment.scheduledDate,
             _id: this.props.appointment._id
         };
-        axios.put(`/appointment/${appointment._id}`, {
-            
-        }).then((res) => {
-            this.props.updateAppointment(this.props.date);
+        axios.put(`/appointment/${appointment._id}`, myAppointment).then((res) => {
+            this.props.updateAppointment(this.props.date, myAppointment);
             this.props.history.push('/');
         });
     }
@@ -70,7 +68,7 @@ export default class Appointment extends React.Component {
 
     renderExistingAppointment() {
         return (
-            <div className = "container center">
+            <div className="container center">
                 <h1>{this.props.appointment.firstName}'s Appointment</h1>
                 <input type="text" placeholder="First Name" ref="first_name" defaultValue={this.props.appointment.firstName} required />
                 <input type="text" placeholder="Last Name" ref="last_name" defaultValue={this.props.appointment.lastName} required />
@@ -94,7 +92,7 @@ export default class Appointment extends React.Component {
 
     renderNewAppointment() {
         return (
-            <div className = "container center">
+            <div className="container center">
                 <h1>New Appointment</h1>
                 <input type="text" placeholder="First Name" ref="first_name" required />
                 <input type="text" placeholder="Last Name" ref="last_name" required />
